@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+	<!-- bean 
+		bean的id属性在该上下文中不能重复，只能出现一次
+		==> userService= new UserService();
+			userService.setName("hss");
+			userService2= new UserService();
+			userService2.setName("milo");
+			userService2.setAge(21);
+	-->
+	<bean id="userService" class="com.hss.applicaiton_context.service.UserService">
+		<property name="name">
+			<value>hss</value>
+		</property>
+	</bean>
+	<bean id="userService2" class="com.hss.applicaiton_context.service.UserService2">
+		<property name="name">
+			<value>milo</value>
+		</property>
+		<property name="age">
+			<value>21</value>
+		</property>
+		<property name="userService" ref="userService" />
+	</bean>
+	<!-- <bean id="change" class="com.hss.applicaiton_context.service.ChangeToUpper">
+		<property name="s">
+			<value>asdfgg</value>
+		</property>
+	</bean> -->
+	<bean id="change" class="com.hss.applicaiton_context.service.ChangeToLower">
+		<property name="s">
+			<value>ASDAS</value>
+		</property>
+	</bean>
+	
+	<!-- bean的范围 -->
+	<bean id="default" class="com.hss.applicaiton_context.service.User" />
+	<bean id="singleton" class="com.hss.applicaiton_context.service.User" scope="singleton" />
+	<bean id="prototype" class="com.hss.applicaiton_context.service.User" scope="prototype" />
+	
+	<!-- bean的生命周期 -->
+	<bean id="demo3Service" class="com.hss.bean_lifecycle.Demo3Service" >
+		<property name="name">
+			<value>生命周期</value>
+		</property>
+	</bean>	
+	
+	<!-- myspring.v1.service -->
+	<bean id="userDao" class="com.hss.myspring.v1.bean.dao.impl.UserDaoImpl" />
+	<bean id="myUserService" class="com.hss.myspring.v1.service.UserService">
+		<property name="userDao" ref="userDao" />
+	</bean>
+</beans>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.3.xsd"
+        >
+    
+    <!--  开启注解配置 
+	    1.只是驱动依赖注入并未注册bean 
+	    2.bean的定义还是要在xml文件中显式定义 
+	    3.该方式隐式注册了4个*AnnotationBeanPostProcessor
+    -->    
+	<context:annotation-config />
+	
+	<!--  开启包内扫描	 
+		1.检测类并注册bean 
+		2.隐式包含了AutowiredAnnotationBeanPostProcessor和CommonAnnotationBeanPostProcessor
+		4.每个组件都会被自动检测并且织入
+		5.默认检测@Component @Repository @Service @Controller的标注类
+		6.注册的bean 默认名字是类名首字母小写
+	-->
+	<!-- 配置MyBeanNameGenerator -->
+	<context:component-scan base-package="com.hss.annotation">
+	</context:component-scan>
+	
+	<!-- bean后置处理器 -->
+	<bean id="beanPostProcessor" class="com.hss.annotation.utils.MyBeanPostProcessor" />
+	
+	
+</beans>

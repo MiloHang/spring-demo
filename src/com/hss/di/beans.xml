@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- 开启注解扫描 -->
+	<context:component-scan base-package="com.hss.*" />
+
+	<!-- Person -->
+	<bean id="person1" class="com.hss.di.entity.Person">
+		<property name="name">
+			<value>bob</value>
+		</property>
+	</bean>
+
+	<bean id="person2" class="com.hss.di.entity.Person">
+		<property name="name">
+			<value>lily</value>
+		</property>
+	</bean>
+
+	<!--Department -->
+	<bean id="department1" class="com.hss.di.entity.Department">
+		<property name="id">
+			<value>1</value>
+		</property>
+		<property name="person">
+			<list>
+				<value>xiaoming</value>
+				<value>bob</value>
+				<value>lily</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="department2" class="com.hss.di.entity.Department">
+		<property name="id">
+			<value>2</value>
+		</property>
+		<property name="person_arr">
+			<list>
+				<ref bean="person1" />
+				<ref bean="person2" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="department3" class="com.hss.di.entity.Department">
+		<property name="id">
+			<value>2</value>
+		</property>
+		<property name="person_list">
+			<list>
+				<ref bean="person1" />
+				<ref bean="person2" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="department4" class="com.hss.di.entity.Department">
+		<property name="id">
+			<value>2</value>
+		</property>
+		<property name="person_set">
+			<set>
+				<ref bean="person1" />
+				<ref bean="person2" />
+			</set>
+		</property>
+	</bean>
+
+	<bean id="department5" class="com.hss.di.entity.Department">
+		<property name="id">
+			<value>2</value>
+		</property>
+		<property name="person_map">
+			<map key-type="java.lang.String" value-type="java.lang.Object">
+				<entry key="1" value-ref="person1" />
+				<entry key="2" value-ref="person2" />
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="department6" class="com.hss.di.entity.Department">
+		<property name="id">
+			<value>2</value>
+		</property>
+		<property name="pp">
+			<props>
+				<prop key="1">hello</prop>
+				<prop key="2">world</prop>
+			</props>
+		</property>
+	</bean>
+</beans>

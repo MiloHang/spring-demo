@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.3.xsd"
+        default-autowire="byType"
+        >
+
+	<!-- 开启包扫描 -->
+	<context:component-scan base-package="com.hss.*" />
+	
+	<!-- autowire自动注入 -->
+	
+	<!-- byName是指 如果有匹配的id或者name则自动注入 -->
+	<bean id="master" class="com.hss.autowire.entity.Master" autowire="byName">
+		<property name="name" value="杭少石" />
+	</bean>
+	
+	<!-- byType是指 如果有bean的类型匹配则自动注入,如果有多个同一类型会报错 -->
+	<!-- <bean id="master2" class="com.hss.autowire.entity.Master" autowire="byType">
+		<property name="name" value="金美伶"></property>
+	</bean> -->
+	
+	<!-- constructor是指 如果有bean的类型匹配则自动注入 -->
+	<bean id="master3" class="com.hss.autowire.entity.Master" autowire="constructor">
+		<property name="name" value="金美伶"></property>
+	</bean>
+	
+	<!-- 被装配对象 -->
+	<bean id="dog1" name="dog" class="com.hss.autowire.entity.Dog">		
+		<property name="name" value="飞机" />
+	</bean>
+	
+	<bean id="dog2" class="com.hss.autowire.entity.Dog">
+		<property name="name" value="轮船" />
+	</bean>
+	
+	<bean id="dog3" class="com.hss.autowire.entity.Dog">
+		<property name="name" value="火车" />
+	</bean>
+</beans>

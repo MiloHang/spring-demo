@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+	<!-- 配置被代理的对象 -->
+	<bean id="userService1" class="com.hss.aop.entity.UserServiceImpl1" />
+	<!-- <bean id="userService2" class="com.hss.aop.entity.UserServiceImpl2" />	 -->
+	
+	<!-- 配置前置通知 -->
+	<bean id="myMethodBeforeAdvice" class="com.hss.aop.entity.MyMethodBeforeAdvice" />
+	
+	<!-- 配置后置通知 -->
+	<bean id="myAfterReturningAdvice" class="com.hss.aop.entity.MyAfterReturningAdvice" />
+	
+	<!-- 配置环绕通知 -->
+	<bean id="myAroundAdvice" class="com.hss.aop.entity.MyAroundAdvice" />
+	
+	<!-- 配置异常通知 -->
+	<bean id="myThrowsAdvice" class="com.hss.aop.entity.MyThrowsAdvice" />
+	
+	<!-- 自定义切入点 -->
+	<bean id="myMethodBeforeAdivceFilter" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+		<property name="advice" ref="myMethodBeforeAdvice"/>
+		<property name="mappedNames">
+			<list>
+				<value>getUserInfo</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 配置代理对象 -->
+	<bean id="proxyFactoryBean" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<!-- 配置代理接口集 -->
+		<property name="proxyInterfaces">
+			<list>
+				<value>com.hss.aop.entity.UserService1</value>
+				<value>com.hss.aop.entity.UserService2</value>
+			</list>
+		</property>
+		<!-- 把通知织入到代理对象(也可以理解为代理对象配置拦截器)-->
+		<property name="interceptorNames">
+			<list>
+				<!-- 织入前置通知 -->
+				<!-- <value>myMethodBeforeAdvice</value> -->
+				<!-- 织入后置通知 -->
+				<value>myAfterReturningAdvice</value>
+				<!-- 织入环绕通知 -->
+				<value>myAroundAdvice</value>
+				<!-- 织入异常通知 -->
+				<value>myThrowsAdvice</value>
+				<!-- 织入自定义切入点 -->
+				<value>myMethodBeforeAdivceFilter</value>
+			</list>
+		</property>
+		<!-- 关联被代理的对象 -->
+		<!-- 这里执行的是UserService1 userService1 = (UserService1)proxyBeanFactory -->
+		<property name="target" ref="userService1"/>
+	</bean>
+</beans>

@@ -1,0 +1,34 @@
+spring-demo项目是学习spring基础知识的实验代码
+
+applicaiton_context:
+1.配置applicationContext.xml
+2.配置bean进行实验
+3.配置入口-多配置模式的spring加载方式
+
+bean_factory:
+1.BeanFactory的使用
+2.bean scope实验
+
+bean_lifecycle:
+1.bean的生命周期
+
+constructor:
+1.通过构造器方式注入bean
+
+di:
+1.数组，set,list,map集合类型的bean的注入
+
+inherit:
+1.继承的注入方式
+
+autowire:
+1.配置自动注入方式：autowire="byName"
+					   "byType"
+					   "constructor"
+					   "detect"
+					   "default"
+			  <beans default-autowire="">
+specialbean:
+1.spring提供的一些特殊bean:
+BeanPostProcessor
+PropertyPlaceholderConfigurer

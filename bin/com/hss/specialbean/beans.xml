@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.3.xsd"
+        default-autowire="byType"
+        >
+	
+	<!-- 开启包扫描 -->
+	<context:component-scan base-package="com.hss.*" />
+	<!-- 配置资源文件.properties -->
+	<context:property-placeholder location="classpath:com/hss/specialbean/db.properties
+											,classpath:com/hss/specialbean/db2.properties"/>
+	
+	<bean id="dataSource1" class="com.hss.specialbean.entity.DataSource">
+		<property name="driver" value="${mysql.driver}"></property>
+		<property name="username" value="${mysql.username}"></property>
+		<property name="password" value="${mysql.password}"></property>
+		<property name="url" value="${mysql.url}"></property>
+	</bean>
+	
+	<bean id="dataSource2" class="com.hss.specialbean.entity.DataSource">
+		<property name="driver" value="${oracle.driver}"></property>
+		<property name="username" value="${oracle.username}"></property>
+		<property name="password" value="${oracle.password}"></property>
+		<property name="url" value="${oracle.url}"></property>
+	</bean>
+	
+	<!--  通过PropertyPlaceHolder -->
+	<bean id="propertyPlaceHolder" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:com/hss/specialbean/db.properties</value>
+				<value>classpath:com/hss/specialbean/db2.properties</value>
+			</list>
+		</property>
+	</bean>
+</beans>
