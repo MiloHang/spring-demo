@@ -3,6 +3,9 @@
 .metadata
 .classpath
 .project
+*.settings
 
 # java
 *.jar
+*.class
+*.war
