@@ -15,7 +15,7 @@ public class MyNameGenerator implements BeanNameGenerator {
 		char[] beanNameChr = beanName.toCharArray();
 		beanNameChr[0] += 32; 
 		beanName = new String(beanNameChr);
-		return beanName;
+		return beanName + "generator";
 	}
 
 }

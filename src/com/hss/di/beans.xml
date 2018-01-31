@@ -82,8 +82,15 @@
 			<value>2</value>
 		</property>
 		<property name="person_map">
-			<map key-type="java.lang.String" value-type="java.lang.Object">
-				<entry key="1" value-ref="person1" />
+			<map>
+				<!-- <entry key="1" value-ref="person1" /> -->
+				<entry key="1">
+					<bean class="com.hss.di.entity.Person">
+						<property name="name">
+							<value>inner</value>
+						</property>
+					</bean>
+				</entry>
 				<entry key="2" value-ref="person2" />
 			</map>
 		</property>

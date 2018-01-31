@@ -11,7 +11,7 @@ import com.hss.annotation.entity.User;
  * <br>
  * <code>@Component(value="primaryUserDao")</code>指定id="primaryUserDao"
  */
-@Component
+@Component("userDaoImpl1")
 public class UserDaoImpl1 implements UserDao {
 	
 	@Override

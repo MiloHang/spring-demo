@@ -23,6 +23,7 @@ public class MyAfterReturningAdvice implements AfterReturningAdvice {
 	@Override
 	public void afterReturning(Object returnValue, Method method,
 			Object[] args, Object target) throws Throwable {
+		System.out.println(method.getName() + "方法的返回结果是 " + returnValue);
 		System.out.println(method.getName() + "后置通知结束...");
 	}
 }

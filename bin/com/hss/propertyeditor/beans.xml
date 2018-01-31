@@ -28,16 +28,45 @@
 		5.默认检测@Component @Repository @Service @Controller的标注类
 		6.注册的bean 默认名字是类名首字母小写
 	-->
-	
 	<!-- 配置MyBeanNameGenerator -->
-	<!-- <context:component-scan base-package="com.hss.annotation" name-generator="com.hss.annotation.utils.MyNameGenerator">
-	</context:component-scan> -->
-	
-	<context:component-scan base-package="com.hss.annotation">
+	<context:component-scan base-package="com.hss.propertyeditor" >
 	</context:component-scan>
 	
-	<!-- bean后置处理器 -->
-	<bean id="beanPostProcessor" class="com.hss.annotation.utils.MyBeanPostProcessor" />
+	<bean id="user" class="com.hss.propertyeditor.entity.User">
+		<property name="lowerName">
+			<value>milo</value>
+		</property>
+		<property name="upperName">
+			<value>MILO</value>
+		</property>
+		<property name="age">
+			<value>18</value>
+		</property>
+		<property name="date">
+			<value>2018-01-08</value>
+		</property>
+	</bean>
+		
+	<bean id="school" class="com.hss.propertyeditor.entity.School">
+		<property name="user">
+			<value>json_user</value>
+		</property>
+	</bean>	
 	
-	
+	<!-- 注册属性编辑器 -->
+	<bean id="customEditorConfigurer" class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+		<!-- 方式1：直接指定编辑器 -->
+		<property name="customEditors">
+			<map>
+				<entry key="com.hss.propertyeditor.entity.User" value="com.hss.propertyeditor.editor.UserPropertyEditor"/>
+				<entry key="java.util.Date" value="com.hss.propertyeditor.editor.DatePropertyEditor"/>
+			</map>
+		</property>
+		<!-- 方式2：指定属性编辑器注册员 -->
+		<property name="propertyEditorRegistrars">
+			<list>
+				<bean class="com.hss.propertyeditor.editor.MyPropertyEditorRegistrar" />
+			</list>
+		</property>
+	</bean>
 </beans>

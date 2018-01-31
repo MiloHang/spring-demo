@@ -52,7 +52,7 @@
 		<property name="interceptorNames">
 			<list>
 				<!-- 织入前置通知 -->
-				<!-- <value>myMethodBeforeAdvice</value> -->
+				<value>myMethodBeforeAdvice</value>
 				<!-- 织入后置通知 -->
 				<value>myAfterReturningAdvice</value>
 				<!-- 织入环绕通知 -->

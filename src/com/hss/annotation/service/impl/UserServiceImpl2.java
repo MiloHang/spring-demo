@@ -10,7 +10,7 @@ import com.hss.annotation.dao.UserDao;
 import com.hss.annotation.entity.User;
 import com.hss.annotation.service.UserService;
 
-@Service
+@Service("userServiceImpl2")
 public class UserServiceImpl2 implements UserService {
 
 	/**
@@ -18,7 +18,7 @@ public class UserServiceImpl2 implements UserService {
 	 * 1.默认使用字段名作为id，在spring容器中查找相应bean,然后回退为原始UserDao类型注入
 	 * 2.指定name属性会查找id=name的bean,然后回退为原始UserDao类型注入
 	 */
-	@Resource(name="primaryUserDao")
+	@Resource(name="userDaoImpl2")
 	private UserDao userDao;
 	
 	@Override

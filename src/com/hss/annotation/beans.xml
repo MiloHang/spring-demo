@@ -28,7 +28,11 @@
 		5.默认检测@Component @Repository @Service @Controller的标注类
 		6.注册的bean 默认名字是类名首字母小写
 	-->
+	
 	<!-- 配置MyBeanNameGenerator -->
+	<!-- <context:component-scan base-package="com.hss.annotation" name-generator="com.hss.annotation.utils.MyNameGenerator">
+	</context:component-scan> -->
+	
 	<context:component-scan base-package="com.hss.annotation">
 	</context:component-scan>
 	

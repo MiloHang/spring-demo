@@ -3,6 +3,8 @@ package com.hss.annotation.service.impl;
 
 
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +12,7 @@ import com.hss.annotation.dao.UserDao;
 import com.hss.annotation.entity.User;
 import com.hss.annotation.service.UserService;
 
-@Service
+@Service("userServiceImpl1")
 public class UserServiceImpl1 implements UserService {
 
 	/**
@@ -18,7 +20,8 @@ public class UserServiceImpl1 implements UserService {
 	 * 譬如： 面向接口编程时，同一接口有多个实现类 : NoneUniqueBean
 	 * 解决方法：Autowired方式更改为Resource 默认byName方式
 	 */
-	@Autowired
+	// @Autowired
+	@Resource(name="userDaoImpl1")
 	private UserDao userDao;
 	
 	@Override
