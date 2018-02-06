@@ -1,7 +1,5 @@
 package com.hss.aop.aspect.service;
 
-import javax.management.RuntimeErrorException;
-
 import org.springframework.stereotype.Service;
 
 import com.hss.aop.aspect.annotation.Speaker;
@@ -15,6 +13,8 @@ public class UserService {
 	}
 	
 	public void divideZero() {
+		// 通过this的调用就不会出现sayHello()的任何通知，this不涉足代理
+		this.sayHello();
 		try {
 			int a = 1/0;
 		} catch (Exception e) {
@@ -22,7 +22,7 @@ public class UserService {
 		}
 	}
 	
-	@Speaker("hss")
+	@Speaker("admin")
 	public boolean sayMessage(String message, String to) {
 		System.out.println(message + " to " + to);
 		return true;

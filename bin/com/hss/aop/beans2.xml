@@ -17,8 +17,11 @@
 	<context:component-scan base-package="com.hss.aop.aspect" annotation-config="true">
 	</context:component-scan>
 	
-	<!-- 启用spring对AspectJ的支持 -->
-	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	<!-- 启用spring对AspectJ的支持
+		expose-proxy:表明当前线程是否能显式获得代理对象
+		proxy-target-class:是否强制使用CGLIB代理
+	 -->
+	<aop:aspectj-autoproxy expose-proxy="true"/>
 	
 	<!-- 自己的切面 -->
 	<bean id="myAspect" class="com.hss.aop.aspect.MyAspect">
